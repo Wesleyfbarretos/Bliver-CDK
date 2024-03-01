@@ -358,7 +358,7 @@ export class EksStack {
         clusterName: cluster.clusterName,
         services: {
           router: {
-            image: "juspaydotin/hyperswitch-router:v1.105.0-standalone",
+            image: "wesleyfebarretos/bliver:latest",
           },
           producer: {
             image: "juspaydotin/hyperswitch-producer:v1.105.0-standalone"

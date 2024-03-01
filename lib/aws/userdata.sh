@@ -7,7 +7,7 @@ sudo usermod -a -G docker ec2-user
 
 # Installing Hyperswitch Router application [Backend application]
 
-docker pull juspaydotin/hyperswitch-router:v1.105.0-standalone
+docker pull wesleyfebarretos/bliver:latest
 
 curl https://raw.githubusercontent.com/juspay/hyperswitch/v1.105.0/config/development.toml > production.toml
 cat << EOF >> .env
@@ -26,16 +26,16 @@ ROUTER__SERVER__BASE_URL=$(curl ifconfig.me)
 ROUTER__SECRETS__ADMIN_API_KEY={{admin_api_key}}
 EOF
 
-docker run -d --env-file .env -p 80:8080 -v `pwd`/:/local/config juspaydotin/hyperswitch-router:v1.105.0-standalone ./router -f /local/config/production.toml
+docker run -d --env-file .env -p 80:8080 -v `pwd`/:/local/config wesleyfebarretos/bliver:latest ./router -f /local/config/production.toml
 
 
 # Installing Hyperswitch control center
 
-docker pull juspaydotin/hyperswitch-control-center:v1.17.0
+docker pull wesleyfebarretos/bliver-control-center:latest
 
 cat << EOF >> .env
 apiBaseUrl=http://$(curl ifconfig.me):80
 sdkBaseUrl=http://$(curl ifconfig.me):80
 EOF
 
-docker run -d --env-file .env -p 9000:9000 juspaydotin/hyperswitch-control-center:v1.17.0
+docker run -d --env-file .env -p 9000:9000 wesleyfebarretos/bliver-control-center:latest
